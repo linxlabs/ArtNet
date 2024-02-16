@@ -105,8 +105,8 @@ inline Packet generatePacketFrom(const IPAddress &my_ip, const uint8_t my_mac[6]
     r.net_sw = (universe >> 8) & 0x7F;
     r.sub_sw = (universe >> 4) & 0x0F;
     // https://github.com/hideakitai/ArtNet/issues/81
-    r.sw_in[0] = (universe >> 0) & 0x0F;
-    r.sw_out[0] = 0;          // dummy: output port is flexible
+    r.sw_in[0] = 0;
+    r.sw_out[0] = (universe >> 0) & 0x0F; // dummy: output port is flexible
     r.port_types[0] = 0xC0;   // I/O available by DMX512
     r.good_input[0] = 0x80;   // Data received without error
     r.good_output[0] = 0x80;  // Data transmitted without error
