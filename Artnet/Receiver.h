@@ -394,8 +394,9 @@ private:
             universes[0] = true;
         }
 
+        uint8_t bind = 1;
         for (const auto &u_pair : universes) {
-            art_poll_reply::Packet reply = art_poll_reply::generatePacketFrom(my_ip, my_mac, u_pair.first, this->art_poll_reply_config);
+            art_poll_reply::Packet reply = art_poll_reply::generatePacketFrom(my_ip, my_mac, u_pair.first, bind++, this->art_poll_reply_config);
             this->stream->beginPacket(remote.ip, DEFAULT_PORT);
             this->stream->write(reply.b, sizeof(art_poll_reply::Packet));
             this->stream->endPacket();
