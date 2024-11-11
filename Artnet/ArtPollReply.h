@@ -79,7 +79,7 @@ struct Config
     uint8_t sw_in[4] {0};
 };
 
-inline Packet generatePacketFrom(const IPAddress &my_ip, const uint8_t my_mac[6], uint16_t universe, const Config &metadata)
+inline Packet generatePacketFrom(const IPAddress &my_ip, const uint8_t my_mac[6], uint16_t universe, uint8_t bind, const Config &metadata)
 {
     Packet r;
     for (size_t i = 0; i < ID_LENGTH; i++) {
@@ -133,7 +133,7 @@ inline Packet generatePacketFrom(const IPAddress &my_ip, const uint8_t my_mac[6]
     for (size_t i = 0; i < 4; ++i) {
         r.bind_ip[i] = my_ip[i];
     }
-    r.bind_index = 0;
+    r.bind_index = bind;
     r.status_2 = metadata.status2;
     memset(r.filler, 0x00, 26);
 
